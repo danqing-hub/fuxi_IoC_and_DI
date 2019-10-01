@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+       <!--目标类-->
+    <bean id="userDao" class="com.danqing.fuxi.aspectj.xml.UserDaoImpl"/>
+
+    <bean id="myAspect" class="com.danqing.fuxi.aspectj.xml.MyAspect"/>
+
+    <aop:config>
+        <!--配置切面-->
+        <aop:aspect ref="myAspect">
+            <aop:pointcut id="myPointCut" expression="execution(* com.danqing.fuxi.aspectj.xml.*.*(..))"/>
+            <aop:around method="myAround" pointcut-ref="myPointCut"/>
+
+        </aop:aspect>
+    </aop:config>
+
+</beans>
